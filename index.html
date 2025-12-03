@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,21 @@
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        slate: {
+                            850: '#151f32', // Custom dark shade
+                            950: '#020617',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -18,7 +33,6 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
         }
         /* Arabic Font Support */
         body[dir="rtl"] {
@@ -35,34 +49,47 @@
             background: radial-gradient(circle at top right, #eff6ff 0%, #ffffff 40%);
         }
 
+        /* Dark Mode Hero Background */
+        .dark .hero-bg {
+            background: radial-gradient(circle at top right, #1e293b 0%, #020617 40%);
+        }
+
         .feature-card:hover {
             transform: translateY(-5px);
         }
     </style>
 </head>
-<body class="text-slate-800 bg-white" dir="ltr">
+<body class="text-slate-800 bg-white dark:bg-slate-950 dark:text-slate-200 transition-colors duration-300" dir="ltr">
 
     <!-- Navbar -->
-    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
+    <nav class="fixed w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-100 dark:border-slate-800 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center gap-2">
                     <i data-lucide="wrench" class="text-blue-600 w-6 h-6"></i>
-                    <span class="text-xl font-bold tracking-tight text-slate-900">FixIt POS</span>
+                    <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">FixIt POS</span>
                 </div>
                 
                 <div class="flex items-center gap-4">
+                    <!-- Theme Toggle -->
+                    <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors">
+                        <i data-lucide="moon" class="w-5 h-5 block dark:hidden"></i>
+                        <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
+                    </button>
+
+                    <!-- Language Selector -->
                     <div class="relative group">
-                        <button class="flex items-center gap-1 text-sm font-medium hover:text-blue-600 transition-colors">
+                        <button class="flex items-center gap-1 text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                             <i data-lucide="globe" class="w-4 h-4"></i>
                             <span id="current-lang">English</span>
                         </button>
-                        <div class="absolute right-0 mt-2 w-32 bg-white border rounded-lg shadow-lg hidden group-hover:block p-1">
-                            <button onclick="setLanguage('en')" class="block w-full text-left px-4 py-2 text-sm hover:bg-slate-50 rounded">English</button>
-                            <button onclick="setLanguage('tr')" class="block w-full text-left px-4 py-2 text-sm hover:bg-slate-50 rounded">Türkçe</button>
-                            <button onclick="setLanguage('ar')" class="block w-full text-right px-4 py-2 text-sm hover:bg-slate-50 rounded">العربية</button>
+                        <div class="absolute right-0 mt-2 w-32 bg-white dark:bg-slate-900 border dark:border-slate-800 rounded-lg shadow-lg hidden group-hover:block p-1">
+                            <button onclick="setLanguage('en')" class="block w-full text-left px-4 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-800 rounded dark:text-slate-300">English</button>
+                            <button onclick="setLanguage('tr')" class="block w-full text-left px-4 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-800 rounded dark:text-slate-300">Türkçe</button>
+                            <button onclick="setLanguage('ar')" class="block w-full text-right px-4 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-800 rounded dark:text-slate-300">العربية</button>
                         </div>
                     </div>
+
                     <a href="#download" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-full text-sm font-semibold transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5" data-key="navDownload">
                         Download Now
                     </a>
@@ -72,35 +99,48 @@
     </nav>
 
     <!-- Hero Section -->
-    <header class="hero-bg pt-32 pb-20 lg:pt-40 lg:pb-28">
+    <header class="hero-bg pt-32 pb-20 lg:pt-40 lg:pb-28 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold mb-6 border border-blue-100">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs font-semibold mb-6 border border-blue-100 dark:border-blue-800">
                 <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
                 <span data-key="heroBadge">New Version Available</span>
             </div>
-            <h1 class="text-5xl lg:text-7xl font-bold tracking-tight mb-6 text-slate-900">
+            <h1 class="text-5xl lg:text-7xl font-bold tracking-tight mb-6 text-slate-900 dark:text-white">
                 <span data-key="heroTitle1">The Smartest Way to Manage</span><br>
                 <span class="gradient-text" data-key="heroTitle2">Your Repair Shop</span>
             </h1>
-            <p class="text-lg text-slate-500 max-w-2xl mx-auto mb-10 leading-relaxed" data-key="heroDesc">
+            <p class="text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed" data-key="heroDesc">
                 Track repairs, manage inventory, and analyze profits in one powerful application. Built for repair technicians, by repair technicians.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <button onclick="downloadApp()" class="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all shadow-xl hover:shadow-2xl">
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+                <button onclick="downloadApp()" class="flex items-center gap-2 bg-slate-900 dark:bg-blue-600 hover:bg-slate-800 dark:hover:bg-blue-500 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all shadow-xl hover:shadow-2xl">
                     <i data-lucide="download" class="w-5 h-5"></i>
                     <span data-key="mainDownload">Download for Windows</span>
                 </button>
-                <a href="#features" class="flex items-center gap-2 text-slate-600 hover:text-blue-600 px-6 py-4 font-medium transition-colors">
+                <a href="#features" class="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 px-6 py-4 font-medium transition-colors">
                     <span data-key="learnMore">Learn More</span>
                     <i data-lucide="arrow-down" class="w-4 h-4"></i>
                 </a>
             </div>
+
+            <!-- Activation Key Contact Section -->
+            <div class="inline-block bg-white dark:bg-slate-900 border-2 border-blue-100 dark:border-blue-900/50 rounded-2xl p-6 shadow-lg transform transition-transform hover:scale-105">
+                <div class="flex flex-col items-center">
+                    <span class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2" data-key="activationLabel">Contact me to get your activation key-code</span>
+                    <div class="flex items-center gap-3 text-3xl font-bold text-blue-600 dark:text-blue-400">
+                        <i data-lucide="phone-call" class="w-8 h-8"></i>
+                        <span data-key="phoneNumber">+90 536 691 47 31</span>
+                    </div>
+                    <span class="text-xs text-slate-400 dark:text-slate-500 mt-2" data-key="supportText">Available on WhatsApp & Telegram</span>
+                </div>
+            </div>
             
             <!-- Mockup Visual -->
             <div class="mt-16 relative mx-auto max-w-5xl">
-                <div class="rounded-xl bg-slate-900 p-2 shadow-2xl ring-1 ring-slate-900/10">
+                <div class="rounded-xl bg-slate-900 p-2 shadow-2xl ring-1 ring-slate-900/10 dark:ring-slate-700/50">
                     <div class="rounded-lg overflow-hidden bg-slate-800 aspect-video flex items-center justify-center text-slate-500 relative">
-                        <!-- Abstract representation of the UI described in App.jsx -->
+                        <!-- Abstract representation of the UI -->
                         <div class="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 flex flex-col p-8">
                             <!-- Sidebar -->
                             <div class="absolute left-0 top-0 bottom-0 w-48 bg-slate-900 border-r border-slate-700 p-4 space-y-4 hidden md:block">
@@ -135,144 +175,153 @@
     </header>
 
     <!-- What Is It Section -->
-    <section id="about" class="py-24 bg-white">
+    <section id="about" class="py-24 bg-white dark:bg-slate-950 transition-colors duration-300">
         <div class="max-w-4xl mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold mb-6 text-slate-900" data-key="aboutTitle">What is FixIt POS?</h2>
-            <p class="text-lg text-slate-600 leading-relaxed" data-key="aboutDesc">
+            <h2 class="text-3xl font-bold mb-6 text-slate-900 dark:text-white" data-key="aboutTitle">What is FixIt POS?</h2>
+            <p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed" data-key="aboutDesc">
                 FixIt POS is a modern, lightweight desktop application designed specifically for electronics repair shops. Whether you fix smartphones, laptops, or general electronics, FixIt streamlines your entire workflow from the moment a customer walks in to the moment they pay. It replaces messy paper tickets and complex spreadsheets with a clean, intuitive digital interface.
             </p>
         </div>
     </section>
 
     <!-- What It Does (Features) -->
-    <section id="features" class="py-24 bg-slate-50">
+    <section id="features" class="py-24 bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-slate-900" data-key="featuresTitle">Powerful Features</h2>
-                <p class="mt-4 text-slate-500" data-key="featuresSubtitle">Everything you need to run your shop efficiently.</p>
+                <h2 class="text-3xl font-bold text-slate-900 dark:text-white" data-key="featuresTitle">Powerful Features</h2>
+                <p class="mt-4 text-slate-500 dark:text-slate-400" data-key="featuresSubtitle">Everything you need to run your shop efficiently.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Feature 1 -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 feature-card transition-transform duration-300">
-                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 mb-6">
+                <div class="bg-white dark:bg-slate-850 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 feature-card transition-all duration-300">
+                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center text-blue-600 dark:text-blue-400 mb-6">
                         <i data-lucide="smartphone"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-slate-900" data-key="f1Title">Repair Tracking</h3>
-                    <p class="text-slate-500" data-key="f1Desc">Track active repairs, mark them as ready, and maintain a complete history of all jobs done.</p>
+                    <h3 class="text-xl font-bold mb-3 text-slate-900 dark:text-white" data-key="f1Title">Repair Tracking</h3>
+                    <p class="text-slate-500 dark:text-slate-400" data-key="f1Desc">Track active repairs, mark them as ready, and maintain a complete history of all jobs done.</p>
                 </div>
 
                 <!-- Feature 2 -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 feature-card transition-transform duration-300">
-                    <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center text-green-600 mb-6">
+                <div class="bg-white dark:bg-slate-850 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 feature-card transition-all duration-300">
+                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center text-green-600 dark:text-green-400 mb-6">
                         <i data-lucide="package"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-slate-900" data-key="f2Title">Inventory Control</h3>
-                    <p class="text-slate-500" data-key="f2Desc">Real-time stock management. Parts are automatically deducted when assigned to a repair ticket.</p>
+                    <h3 class="text-xl font-bold mb-3 text-slate-900 dark:text-white" data-key="f2Title">Inventory Control</h3>
+                    <p class="text-slate-500 dark:text-slate-400" data-key="f2Desc">Real-time stock management. Parts are automatically deducted when assigned to a repair ticket.</p>
                 </div>
 
                 <!-- Feature 3 -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 feature-card transition-transform duration-300">
-                    <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 mb-6">
+                <div class="bg-white dark:bg-slate-850 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 feature-card transition-all duration-300">
+                    <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center text-purple-600 dark:text-purple-400 mb-6">
                         <i data-lucide="sparkles"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-slate-900" data-key="f3Title">AI Assistant</h3>
-                    <p class="text-slate-500" data-key="f3Desc">Ask the built-in AI questions about your revenue, stock levels, or business trends instantly.</p>
+                    <h3 class="text-xl font-bold mb-3 text-slate-900 dark:text-white" data-key="f3Title">AI Assistant</h3>
+                    <p class="text-slate-500 dark:text-slate-400" data-key="f3Desc">Ask the built-in AI questions about your revenue, stock levels, or business trends instantly.</p>
                 </div>
 
                 <!-- Feature 4 -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 feature-card transition-transform duration-300">
-                    <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center text-orange-600 mb-6">
+                <div class="bg-white dark:bg-slate-850 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 feature-card transition-all duration-300">
+                    <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center text-orange-600 dark:text-orange-400 mb-6">
                         <i data-lucide="bar-chart-3"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-slate-900" data-key="f4Title">Financial Analytics</h3>
-                    <p class="text-slate-500" data-key="f4Desc">Visualize your revenue, costs, and net profit. Track damaged goods losses and returns.</p>
+                    <h3 class="text-xl font-bold mb-3 text-slate-900 dark:text-white" data-key="f4Title">Financial Analytics</h3>
+                    <p class="text-slate-500 dark:text-slate-400" data-key="f4Desc">Visualize your revenue, costs, and net profit. Track damaged goods losses and returns.</p>
                 </div>
 
-                <!-- Feature 5 -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 feature-card transition-transform duration-300">
-                    <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center text-teal-600 mb-6">
+                <!-- Feature 5 - UNDER REVIEW -->
+                <div class="bg-white dark:bg-slate-850 p-8 rounded-2xl shadow-sm border-2 border-yellow-200 dark:border-yellow-900/50 feature-card transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-yellow-400 text-yellow-900 text-[10px] font-bold px-2 py-1 rounded-bl-lg">
+                        UNDER REVIEW
+                    </div>
+                    <div class="w-12 h-12 bg-teal-100 dark:bg-teal-900/30 rounded-xl flex items-center justify-center text-teal-600 dark:text-teal-400 mb-6 opacity-75">
                         <i data-lucide="message-circle"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-slate-900" data-key="f5Title">WhatsApp Alerts</h3>
-                    <p class="text-slate-500" data-key="f5Desc">Send automated "Device Ready" messages to customers with one click, including the final price.</p>
+                    <div class="flex items-center gap-2 mb-3">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white" data-key="f5Title">WhatsApp Alerts</h3>
+                        <i data-lucide="alert-triangle" class="w-4 h-4 text-yellow-500"></i>
+                    </div>
+                    <p class="text-slate-500 dark:text-slate-400" data-key="f5Desc">Send automated "Device Ready" messages to customers with one click, including the final price.</p>
+                    <p class="mt-4 text-xs font-semibold text-yellow-600 dark:text-yellow-500 bg-yellow-50 dark:bg-yellow-900/20 p-2 rounded">
+                        <i data-lucide="wrench" class="w-3 h-3 inline mr-1"></i> Feature currently down for maintenance/bug fixes.
+                    </p>
                 </div>
 
                 <!-- Feature 6 -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 feature-card transition-transform duration-300">
-                    <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center text-indigo-600 mb-6">
+                <div class="bg-white dark:bg-slate-850 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 feature-card transition-all duration-300">
+                    <div class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/30 rounded-xl flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-6">
                         <i data-lucide="file-spreadsheet"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-slate-900" data-key="f6Title">Excel Import/Export</h3>
-                    <p class="text-slate-500" data-key="f6Desc">Seamlessly backup your data or migrate from other systems using .xlsx files.</p>
+                    <h3 class="text-xl font-bold mb-3 text-slate-900 dark:text-white" data-key="f6Title">Excel Import/Export</h3>
+                    <p class="text-slate-500 dark:text-slate-400" data-key="f6Desc">Seamlessly backup your data or migrate from other systems using .xlsx files.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- What It Fixes (Problems vs Solutions) -->
-    <section class="py-24 bg-white overflow-hidden">
+    <section class="py-24 bg-white dark:bg-slate-950 overflow-hidden transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-slate-900" data-key="fixTitle">What Does It Fix?</h2>
-                <p class="mt-4 text-slate-500" data-key="fixSubtitle">Common repair shop headaches, solved.</p>
+                <h2 class="text-3xl font-bold text-slate-900 dark:text-white" data-key="fixTitle">What Does It Fix?</h2>
+                <p class="mt-4 text-slate-500 dark:text-slate-400" data-key="fixSubtitle">Common repair shop headaches, solved.</p>
             </div>
 
             <div class="space-y-8">
                 <!-- Problem 1 -->
-                <div class="flex flex-col md:flex-row items-center gap-8 bg-slate-50 rounded-2xl p-6 md:p-10 border border-slate-100">
+                <div class="flex flex-col md:flex-row items-center gap-8 bg-slate-50 dark:bg-slate-900 rounded-2xl p-6 md:p-10 border border-slate-100 dark:border-slate-800">
                     <div class="flex-1">
                         <div class="flex items-center gap-3 mb-4">
                             <i data-lucide="x-circle" class="text-red-500"></i>
-                            <h3 class="font-bold text-lg text-slate-700" data-key="prob1">Problem: Lost Paper Tickets</h3>
+                            <h3 class="font-bold text-lg text-slate-700 dark:text-slate-300" data-key="prob1">Problem: Lost Paper Tickets</h3>
                         </div>
-                        <p class="text-slate-500" data-key="prob1Desc">Handwritten receipts get lost, faded, or misread, causing customer disputes and confusion.</p>
+                        <p class="text-slate-500 dark:text-slate-400" data-key="prob1Desc">Handwritten receipts get lost, faded, or misread, causing customer disputes and confusion.</p>
                     </div>
-                    <div class="hidden md:block text-slate-300"><i data-lucide="arrow-right" class="w-8 h-8"></i></div>
+                    <div class="hidden md:block text-slate-300 dark:text-slate-600"><i data-lucide="arrow-right" class="w-8 h-8"></i></div>
                     <div class="flex-1">
                         <div class="flex items-center gap-3 mb-4">
                             <i data-lucide="check-circle" class="text-green-500"></i>
-                            <h3 class="font-bold text-lg text-slate-900" data-key="sol1">Solution: Digital Database</h3>
+                            <h3 class="font-bold text-lg text-slate-900 dark:text-white" data-key="sol1">Solution: Digital Database</h3>
                         </div>
-                        <p class="text-slate-600" data-key="sol1Desc">Every repair is logged digitally, searchable by name, device, or phone number instantly.</p>
+                        <p class="text-slate-600 dark:text-slate-300" data-key="sol1Desc">Every repair is logged digitally, searchable by name, device, or phone number instantly.</p>
                     </div>
                 </div>
 
                 <!-- Problem 2 -->
-                <div class="flex flex-col md:flex-row items-center gap-8 bg-slate-50 rounded-2xl p-6 md:p-10 border border-slate-100">
+                <div class="flex flex-col md:flex-row items-center gap-8 bg-slate-50 dark:bg-slate-900 rounded-2xl p-6 md:p-10 border border-slate-100 dark:border-slate-800">
                     <div class="flex-1">
                         <div class="flex items-center gap-3 mb-4">
                             <i data-lucide="x-circle" class="text-red-500"></i>
-                            <h3 class="font-bold text-lg text-slate-700" data-key="prob2">Problem: Inventory Guesswork</h3>
+                            <h3 class="font-bold text-lg text-slate-700 dark:text-slate-300" data-key="prob2">Problem: Inventory Guesswork</h3>
                         </div>
-                        <p class="text-slate-500" data-key="prob2Desc">Not knowing if you have an iPhone 11 screen in stock until you physically check the bin.</p>
+                        <p class="text-slate-500 dark:text-slate-400" data-key="prob2Desc">Not knowing if you have an iPhone 11 screen in stock until you physically check the bin.</p>
                     </div>
-                    <div class="hidden md:block text-slate-300"><i data-lucide="arrow-right" class="w-8 h-8"></i></div>
+                    <div class="hidden md:block text-slate-300 dark:text-slate-600"><i data-lucide="arrow-right" class="w-8 h-8"></i></div>
                     <div class="flex-1">
                         <div class="flex items-center gap-3 mb-4">
                             <i data-lucide="check-circle" class="text-green-500"></i>
-                            <h3 class="font-bold text-lg text-slate-900" data-key="sol2">Solution: Auto-Deduction</h3>
+                            <h3 class="font-bold text-lg text-slate-900 dark:text-white" data-key="sol2">Solution: Auto-Deduction</h3>
                         </div>
-                        <p class="text-slate-600" data-key="sol2Desc">Inventory counts update automatically as you add parts to repair tickets. Low stock alerts keep you prepared.</p>
+                        <p class="text-slate-600 dark:text-slate-300" data-key="sol2Desc">Inventory counts update automatically as you add parts to repair tickets. Low stock alerts keep you prepared.</p>
                     </div>
                 </div>
 
                 <!-- Problem 3 -->
-                <div class="flex flex-col md:flex-row items-center gap-8 bg-slate-50 rounded-2xl p-6 md:p-10 border border-slate-100">
+                <div class="flex flex-col md:flex-row items-center gap-8 bg-slate-50 dark:bg-slate-900 rounded-2xl p-6 md:p-10 border border-slate-100 dark:border-slate-800">
                     <div class="flex-1">
                         <div class="flex items-center gap-3 mb-4">
                             <i data-lucide="x-circle" class="text-red-500"></i>
-                            <h3 class="font-bold text-lg text-slate-700" data-key="prob3">Problem: Unknown Profits</h3>
+                            <h3 class="font-bold text-lg text-slate-700 dark:text-slate-300" data-key="prob3">Problem: Unknown Profits</h3>
                         </div>
-                        <p class="text-slate-500" data-key="prob3Desc">Revenue is easy to track, but calculating true profit after parts cost, returns, and damages is hard.</p>
+                        <p class="text-slate-500 dark:text-slate-400" data-key="prob3Desc">Revenue is easy to track, but calculating true profit after parts cost, returns, and damages is hard.</p>
                     </div>
-                    <div class="hidden md:block text-slate-300"><i data-lucide="arrow-right" class="w-8 h-8"></i></div>
+                    <div class="hidden md:block text-slate-300 dark:text-slate-600"><i data-lucide="arrow-right" class="w-8 h-8"></i></div>
                     <div class="flex-1">
                         <div class="flex items-center gap-3 mb-4">
                             <i data-lucide="check-circle" class="text-green-500"></i>
-                            <h3 class="font-bold text-lg text-slate-900" data-key="sol3">Solution: Automated P&L</h3>
+                            <h3 class="font-bold text-lg text-slate-900 dark:text-white" data-key="sol3">Solution: Automated P&L</h3>
                         </div>
-                        <p class="text-slate-600" data-key="sol3Desc">FixIt calculates your COGS (Cost of Goods Sold), damaged losses, and returns to show your actual Net Profit.</p>
+                        <p class="text-slate-600 dark:text-slate-300" data-key="sol3Desc">FixIt calculates your COGS, damaged losses, and returns to show your actual Net Profit.</p>
                     </div>
                 </div>
             </div>
@@ -280,7 +329,7 @@
     </section>
 
     <!-- Footer / Download -->
-    <section id="download" class="py-20 bg-slate-900 text-white text-center">
+    <section id="download" class="py-20 bg-slate-900 dark:bg-black text-white text-center transition-colors duration-300">
         <div class="max-w-3xl mx-auto px-4">
             <h2 class="text-3xl font-bold mb-6" data-key="footerTitle">Ready to upgrade your shop?</h2>
             <p class="text-slate-400 mb-8" data-key="footerDesc">Join other professionals using FixIt POS to streamline their repair business.</p>
@@ -291,16 +340,80 @@
         </div>
     </section>
 
-    <footer class="bg-slate-950 text-slate-600 py-8 border-t border-slate-900">
+    <footer class="bg-slate-950 dark:bg-black text-slate-600 dark:text-slate-500 py-8 border-t border-slate-900 dark:border-slate-900 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 text-center text-sm">
             &copy; 2024 FixIt POS. All rights reserved.
         </div>
     </footer>
 
+    <!-- Custom Modal for Download -->
+    <div id="download-modal" class="fixed inset-0 z-[100] hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div class="flex min-h-full items-center justify-center p-4 text-center">
+                <div class="relative transform overflow-hidden rounded-2xl bg-white dark:bg-slate-900 text-left shadow-2xl transition-all sm:w-full sm:max-w-lg border border-slate-100 dark:border-slate-800">
+                    <div class="bg-white dark:bg-slate-900 px-6 pb-6 pt-6 sm:p-8">
+                        <div class="sm:flex sm:items-start">
+                            <div class="mx-auto flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/50 sm:mx-0">
+                                <i data-lucide="download-cloud" class="text-blue-600 dark:text-blue-400 w-7 h-7"></i>
+                            </div>
+                            <div class="mt-4 text-center sm:ml-6 sm:mt-0 sm:text-left">
+                                <h3 class="text-xl font-bold leading-6 text-slate-900 dark:text-white" id="modal-title">Download Started</h3>
+                                <div class="mt-3">
+                                    <p class="text-slate-500 dark:text-slate-400 leading-relaxed">
+                                        Thank you for choosing FixIt POS! The setup file should begin downloading shortly.
+                                        <br><br>
+                                        <span class="text-xs bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 px-2 py-1 rounded border border-slate-200 dark:border-slate-700">
+                                            Note: This is a demo site, so no actual file is downloaded.
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50/80 dark:bg-slate-800/50 px-6 py-4 sm:flex sm:flex-row-reverse sm:px-8 border-t border-slate-100 dark:border-slate-800">
+                        <button type="button" onclick="closeModal()" class="inline-flex w-full justify-center rounded-xl bg-blue-600 hover:bg-blue-500 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-colors sm:ml-3 sm:w-auto">
+                            Got it
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Translations & Logic -->
     <script>
         // Initialize Icons
         lucide.createIcons();
+
+        // Dark Mode Logic
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Initialize Theme on Load
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Modal Logic
+        function downloadApp() {
+            window.open("https://github.com/MaqdadShow/fixit-pos.github.io/releases/download/fixit-pos-0.1.0/fixit_pos_0.1.0_x64-setup.exe")
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('download-modal');
+            modal.classList.add('hidden');
+        }
 
         // Translation Data
         const translations = {
@@ -312,6 +425,9 @@
                 heroDesc: "Track repairs, manage inventory, and analyze profits in one powerful application. Built for repair technicians, by repair technicians.",
                 mainDownload: "Download for Windows",
                 learnMore: "Learn More",
+                activationLabel: "Contact me to get your activation key-code",
+                phoneNumber: "+1 (555) 123-4567",
+                supportText: "Available on WhatsApp & Telegram",
                 aboutTitle: "What is FixIt POS?",
                 aboutDesc: "FixIt POS is a modern, lightweight desktop application designed specifically for electronics repair shops. Whether you fix smartphones, laptops, or general electronics, FixIt streamlines your entire workflow from the moment a customer walks in to the moment they pay. It replaces messy paper tickets and complex spreadsheets with a clean, intuitive digital interface.",
                 featuresTitle: "Powerful Features",
@@ -354,6 +470,9 @@
                 heroDesc: "Tek bir güçlü uygulama ile onarımları takip edin, stoğu yönetin ve kârınızı analiz edin. Tamirciler tarafından, tamirciler için geliştirildi.",
                 mainDownload: "Windows için İndir",
                 learnMore: "Daha Fazla",
+                activationLabel: "Aktivasyon kodu almak için iletişime geçin",
+                phoneNumber: "+1 (555) 123-4567",
+                supportText: "WhatsApp ve Telegram üzerinden ulaşabilirsiniz",
                 aboutTitle: "FixIt POS Nedir?",
                 aboutDesc: "FixIt POS, elektronik tamir dükkanları için özel olarak tasarlanmış modern, hafif bir masaüstü uygulamasıdır. Akıllı telefon, dizüstü bilgisayar veya genel elektronik tamiri yapıyor olun, FixIt, müşterinin içeri girdiği andan ödeme yaptığı ana kadar tüm iş akışınızı düzenler. Karmaşık kağıt fişlerin ve hesap tablolarının yerini temiz, sezgisel bir dijital arayüz alır.",
                 featuresTitle: "Güçlü Özellikler",
@@ -396,6 +515,9 @@
                 heroDesc: "تتبع الإصلاحات، إدارة المخزون، وتحليل الأرباح في تطبيق واحد قوي. صمم خصيصاً لفنيي الصيانة.",
                 mainDownload: "تحميل لنظام ويندوز",
                 learnMore: "المزيد",
+                activationLabel: "تواصل معي للحصول على رمز التفعيل",
+                phoneNumber: "+1 (555) 123-4567",
+                supportText: "متاح عبر واتساب وتليجرام",
                 aboutTitle: "ما هو FixIt POS؟",
                 aboutDesc: "FixIt POS هو تطبيق سطح مكتب حديث وخفيف مصمم خصيصاً لمراكز صيانة الإلكترونيات. سواء كنت تصلح الهواتف الذكية أو أجهزة الكمبيوتر المحمولة، يقوم FixIt بتبسيط سير عملك بالكامل من لحظة دخول العميل حتى الدفع. يستبدل التذاكر الورقية الفوضوية والجداول المعقدة بواجهة رقمية نظيفة وبديهية.",
                 featuresTitle: "ميزات قوية",
@@ -456,11 +578,6 @@
                     el.textContent = translations[lang][key];
                 }
             });
-        }
-
-        function downloadApp() {
-            // Mock download behavior
-            window.open("https://github.com/MaqdadShow/fixit-pos.github.io/releases/download/fixit-pos-0.1.0/fixit_pos_0.1.0_x64-setup.exe", "_blank");
         }
     </script>
 </body>
