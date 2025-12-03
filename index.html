@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FixIt POS - Repair Shop Management Software</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        /* Arabic Font Support */
+        body[dir="rtl"] {
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-bg {
+            background: radial-gradient(circle at top right, #eff6ff 0%, #ffffff 40%);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-white" dir="ltr">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="wrench" class="text-blue-600 w-6 h-6"></i>
+                    <span class="text-xl font-bold tracking-tight text-slate-900">FixIt POS</span>
+                </div>
+                
+                <div class="flex items-center gap-4">
+                    <div class="relative group">
+                        <button class="flex items-center gap-1 text-sm font-medium hover:text-blue-600 transition-colors">
+                            <i data-lucide="globe" class="w-4 h-4"></i>
+                            <span id="current-lang">English</span>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-32 bg-white border rounded-lg shadow-lg hidden group-hover:block p-1">
+                            <button onclick="setLanguage('en')" class="block w-full text-left px-4 py-2 text-sm hover:bg-slate-50 rounded">English</button>
+                            <button onclick="setLanguage('tr')" class="block w-full text-left px-4 py-2 text-sm hover:bg-slate-50 rounded">Türkçe</button>
+                            <button onclick="setLanguage('ar')" class="block w-full text-right px-4 py-2 text-sm hover:bg-slate-50 rounded">العربية</button>
+                        </div>
+                    </div>
+                    <a href="#download" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-full text-sm font-semibold transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5" data-key="navDownload">
+                        Download Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-bg pt-32 pb-20 lg:pt-40 lg:pb-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold mb-6 border border-blue-100">
+                <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+                <span data-key="heroBadge">New Version Available</span>
+            </div>
+            <h1 class="text-5xl lg:text-7xl font-bold tracking-tight mb-6 text-slate-900">
+                <span data-key="heroTitle1">The Smartest Way to Manage</span><br>
+                <span class="gradient-text" data-key="heroTitle2">Your Repair Shop</span>
+            </h1>
+            <p class="text-lg text-slate-500 max-w-2xl mx-auto mb-10 leading-relaxed" data-key="heroDesc">
+                Track repairs, manage inventory, and analyze profits in one powerful application. Built for repair technicians, by repair technicians.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <button onclick="downloadApp()" class="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all shadow-xl hover:shadow-2xl">
+                    <i data-lucide="download" class="w-5 h-5"></i>
+                    <span data-key="mainDownload">Download for Windows</span>
+                </button>
+                <a href="#features" class="flex items-center gap-2 text-slate-600 hover:text-blue-600 px-6 py-4 font-medium transition-colors">
+                    <span data-key="learnMore">Learn More</span>
+                    <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                </a>
+            </div>
+            
+            <!-- Mockup Visual -->
+            <div class="mt-16 relative mx-auto max-w-5xl">
+                <div class="rounded-xl bg-slate-900 p-2 shadow-2xl ring-1 ring-slate-900/10">
+                    <div class="rounded-lg overflow-hidden bg-slate-800 aspect-video flex items-center justify-center text-slate-500 relative">
+                        <!-- Abstract representation of the UI described in App.jsx -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 flex flex-col p-8">
+                            <!-- Sidebar -->
+                            <div class="absolute left-0 top-0 bottom-0 w-48 bg-slate-900 border-r border-slate-700 p-4 space-y-4 hidden md:block">
+                                <div class="h-6 w-24 bg-blue-600 rounded opacity-20 mb-8"></div>
+                                <div class="h-8 w-full bg-slate-800 rounded"></div>
+                                <div class="h-8 w-full bg-slate-800 rounded"></div>
+                                <div class="h-8 w-full bg-slate-800 rounded"></div>
+                            </div>
+                            <!-- Main Content Area -->
+                            <div class="md:ml-56 mt-4 grid grid-cols-3 gap-4">
+                                <div class="h-32 bg-slate-700/50 rounded-lg border border-slate-600/50 p-4">
+                                    <div class="h-4 w-20 bg-green-500 rounded mb-2"></div>
+                                    <div class="h-8 w-12 bg-white/10 rounded"></div>
+                                </div>
+                                <div class="h-32 bg-slate-700/50 rounded-lg border border-slate-600/50 p-4">
+                                    <div class="h-4 w-20 bg-blue-500 rounded mb-2"></div>
+                                    <div class="h-8 w-12 bg-white/10 rounded"></div>
+                                </div>
+                                <div class="h-32 bg-slate-700/50 rounded-lg border border-slate-600/50 p-4">
+                                    <div class="h-4 w-20 bg-purple-500 rounded mb-2"></div>
+                                    <div class="h-8 w-12 bg-white/10 rounded"></div>
+                                </div>
+                            </div>
+                            <div class="absolute bottom-8 right-8 text-white/10 font-bold text-4xl select-none">
+                                FixIt POS UI
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- What Is It Section -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6 text-slate-900" data-key="aboutTitle">What is FixIt POS?</h2>
+            <p class="text-lg text-slate-600 leading-relaxed" data-key="aboutDesc">
+                FixIt POS is a modern, lightweight desktop application designed specifically for electronics repair shops. Whether you fix smartphones, laptops, or general electronics, FixIt streamlines your entire workflow from the moment a customer walks in to the moment they pay. It replaces messy paper tickets and complex spreadsheets with a clean, intuitive digital interface.
+            </p>
+        </div>
+    </section>
+
+    <!-- What It Does (Features) -->
+    <section id="features" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900" data-key="featuresTitle">Powerful Features</h2>
+                <p class="mt-4 text-slate-500" data-key="featuresSubtitle">Everything you need to run your shop efficiently.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 feature-card transition-transform duration-300">
+                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 mb-6">
+                        <i data-lucide="smartphone"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-900" data-key="f1Title">Repair Tracking</h3>
+                    <p class="text-slate-500" data-key="f1Desc">Track active repairs, mark them as ready, and maintain a complete history of all jobs done.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 feature-card transition-transform duration-300">
+                    <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center text-green-600 mb-6">
+                        <i data-lucide="package"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-900" data-key="f2Title">Inventory Control</h3>
+                    <p class="text-slate-500" data-key="f2Desc">Real-time stock management. Parts are automatically deducted when assigned to a repair ticket.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 feature-card transition-transform duration-300">
+                    <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 mb-6">
+                        <i data-lucide="sparkles"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-900" data-key="f3Title">AI Assistant</h3>
+                    <p class="text-slate-500" data-key="f3Desc">Ask the built-in AI questions about your revenue, stock levels, or business trends instantly.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 feature-card transition-transform duration-300">
+                    <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center text-orange-600 mb-6">
+                        <i data-lucide="bar-chart-3"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-900" data-key="f4Title">Financial Analytics</h3>
+                    <p class="text-slate-500" data-key="f4Desc">Visualize your revenue, costs, and net profit. Track damaged goods losses and returns.</p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 feature-card transition-transform duration-300">
+                    <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center text-teal-600 mb-6">
+                        <i data-lucide="message-circle"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-900" data-key="f5Title">WhatsApp Alerts</h3>
+                    <p class="text-slate-500" data-key="f5Desc">Send automated "Device Ready" messages to customers with one click, including the final price.</p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 feature-card transition-transform duration-300">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center text-indigo-600 mb-6">
+                        <i data-lucide="file-spreadsheet"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-900" data-key="f6Title">Excel Import/Export</h3>
+                    <p class="text-slate-500" data-key="f6Desc">Seamlessly backup your data or migrate from other systems using .xlsx files.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What It Fixes (Problems vs Solutions) -->
+    <section class="py-24 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900" data-key="fixTitle">What Does It Fix?</h2>
+                <p class="mt-4 text-slate-500" data-key="fixSubtitle">Common repair shop headaches, solved.</p>
+            </div>
+
+            <div class="space-y-8">
+                <!-- Problem 1 -->
+                <div class="flex flex-col md:flex-row items-center gap-8 bg-slate-50 rounded-2xl p-6 md:p-10 border border-slate-100">
+                    <div class="flex-1">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i data-lucide="x-circle" class="text-red-500"></i>
+                            <h3 class="font-bold text-lg text-slate-700" data-key="prob1">Problem: Lost Paper Tickets</h3>
+                        </div>
+                        <p class="text-slate-500" data-key="prob1Desc">Handwritten receipts get lost, faded, or misread, causing customer disputes and confusion.</p>
+                    </div>
+                    <div class="hidden md:block text-slate-300"><i data-lucide="arrow-right" class="w-8 h-8"></i></div>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i data-lucide="check-circle" class="text-green-500"></i>
+                            <h3 class="font-bold text-lg text-slate-900" data-key="sol1">Solution: Digital Database</h3>
+                        </div>
+                        <p class="text-slate-600" data-key="sol1Desc">Every repair is logged digitally, searchable by name, device, or phone number instantly.</p>
+                    </div>
+                </div>
+
+                <!-- Problem 2 -->
+                <div class="flex flex-col md:flex-row items-center gap-8 bg-slate-50 rounded-2xl p-6 md:p-10 border border-slate-100">
+                    <div class="flex-1">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i data-lucide="x-circle" class="text-red-500"></i>
+                            <h3 class="font-bold text-lg text-slate-700" data-key="prob2">Problem: Inventory Guesswork</h3>
+                        </div>
+                        <p class="text-slate-500" data-key="prob2Desc">Not knowing if you have an iPhone 11 screen in stock until you physically check the bin.</p>
+                    </div>
+                    <div class="hidden md:block text-slate-300"><i data-lucide="arrow-right" class="w-8 h-8"></i></div>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i data-lucide="check-circle" class="text-green-500"></i>
+                            <h3 class="font-bold text-lg text-slate-900" data-key="sol2">Solution: Auto-Deduction</h3>
+                        </div>
+                        <p class="text-slate-600" data-key="sol2Desc">Inventory counts update automatically as you add parts to repair tickets. Low stock alerts keep you prepared.</p>
+                    </div>
+                </div>
+
+                <!-- Problem 3 -->
+                <div class="flex flex-col md:flex-row items-center gap-8 bg-slate-50 rounded-2xl p-6 md:p-10 border border-slate-100">
+                    <div class="flex-1">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i data-lucide="x-circle" class="text-red-500"></i>
+                            <h3 class="font-bold text-lg text-slate-700" data-key="prob3">Problem: Unknown Profits</h3>
+                        </div>
+                        <p class="text-slate-500" data-key="prob3Desc">Revenue is easy to track, but calculating true profit after parts cost, returns, and damages is hard.</p>
+                    </div>
+                    <div class="hidden md:block text-slate-300"><i data-lucide="arrow-right" class="w-8 h-8"></i></div>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i data-lucide="check-circle" class="text-green-500"></i>
+                            <h3 class="font-bold text-lg text-slate-900" data-key="sol3">Solution: Automated P&L</h3>
+                        </div>
+                        <p class="text-slate-600" data-key="sol3Desc">FixIt calculates your COGS (Cost of Goods Sold), damaged losses, and returns to show your actual Net Profit.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Download -->
+    <section id="download" class="py-20 bg-slate-900 text-white text-center">
+        <div class="max-w-3xl mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-6" data-key="footerTitle">Ready to upgrade your shop?</h2>
+            <p class="text-slate-400 mb-8" data-key="footerDesc">Join other professionals using FixIt POS to streamline their repair business.</p>
+            <button onclick="downloadApp()" class="bg-blue-600 hover:bg-blue-500 text-white px-10 py-4 rounded-xl text-lg font-bold transition-all shadow-lg hover:shadow-blue-500/25">
+                <span data-key="footerBtn">Download Now</span>
+            </button>
+            <p class="mt-6 text-sm text-slate-500">Version 1.0.0 • Windows 10/11 • macOS Support Coming Soon</p>
+        </div>
+    </section>
+
+    <footer class="bg-slate-950 text-slate-600 py-8 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-4 text-center text-sm">
+            &copy; 2024 FixIt POS. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Translations & Logic -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Translation Data
+        const translations = {
+            en: {
+                navDownload: "Download Now",
+                heroBadge: "New Version Available",
+                heroTitle1: "The Smartest Way to Manage",
+                heroTitle2: "Your Repair Shop",
+                heroDesc: "Track repairs, manage inventory, and analyze profits in one powerful application. Built for repair technicians, by repair technicians.",
+                mainDownload: "Download for Windows",
+                learnMore: "Learn More",
+                aboutTitle: "What is FixIt POS?",
+                aboutDesc: "FixIt POS is a modern, lightweight desktop application designed specifically for electronics repair shops. Whether you fix smartphones, laptops, or general electronics, FixIt streamlines your entire workflow from the moment a customer walks in to the moment they pay. It replaces messy paper tickets and complex spreadsheets with a clean, intuitive digital interface.",
+                featuresTitle: "Powerful Features",
+                featuresSubtitle: "Everything you need to run your shop efficiently.",
+                f1Title: "Repair Tracking",
+                f1Desc: "Track active repairs, mark them as ready, and maintain a complete history of all jobs done.",
+                f2Title: "Inventory Control",
+                f2Desc: "Real-time stock management. Parts are automatically deducted when assigned to a repair ticket.",
+                f3Title: "AI Assistant",
+                f3Desc: "Ask the built-in AI questions about your revenue, stock levels, or business trends instantly.",
+                f4Title: "Financial Analytics",
+                f4Desc: "Visualize your revenue, costs, and net profit. Track damaged goods losses and returns.",
+                f5Title: "WhatsApp Alerts",
+                f5Desc: "Send automated \"Device Ready\" messages to customers with one click, including the final price.",
+                f6Title: "Excel Import/Export",
+                f6Desc: "Seamlessly backup your data or migrate from other systems using .xlsx files.",
+                fixTitle: "What Does It Fix?",
+                fixSubtitle: "Common repair shop headaches, solved.",
+                prob1: "Problem: Lost Paper Tickets",
+                prob1Desc: "Handwritten receipts get lost, faded, or misread, causing customer disputes and confusion.",
+                sol1: "Solution: Digital Database",
+                sol1Desc: "Every repair is logged digitally, searchable by name, device, or phone number instantly.",
+                prob2: "Problem: Inventory Guesswork",
+                prob2Desc: "Not knowing if you have an iPhone 11 screen in stock until you physically check the bin.",
+                sol2: "Solution: Auto-Deduction",
+                sol2Desc: "Inventory counts update automatically as you add parts to repair tickets. Low stock alerts keep you prepared.",
+                prob3: "Problem: Unknown Profits",
+                prob3Desc: "Revenue is easy to track, but calculating true profit after parts cost, returns, and damages is hard.",
+                sol3: "Solution: Automated P&L",
+                sol3Desc: "FixIt calculates your COGS, damaged losses, and returns to show your actual Net Profit.",
+                footerTitle: "Ready to upgrade your shop?",
+                footerDesc: "Join other professionals using FixIt POS to streamline their repair business.",
+                footerBtn: "Download Now"
+            },
+            tr: {
+                navDownload: "İndir",
+                heroBadge: "Yeni Sürüm Mevcut",
+                heroTitle1: "Tamir Dükkanınızı Yönetmenin",
+                heroTitle2: "En Akıllı Yolu",
+                heroDesc: "Tek bir güçlü uygulama ile onarımları takip edin, stoğu yönetin ve kârınızı analiz edin. Tamirciler tarafından, tamirciler için geliştirildi.",
+                mainDownload: "Windows için İndir",
+                learnMore: "Daha Fazla",
+                aboutTitle: "FixIt POS Nedir?",
+                aboutDesc: "FixIt POS, elektronik tamir dükkanları için özel olarak tasarlanmış modern, hafif bir masaüstü uygulamasıdır. Akıllı telefon, dizüstü bilgisayar veya genel elektronik tamiri yapıyor olun, FixIt, müşterinin içeri girdiği andan ödeme yaptığı ana kadar tüm iş akışınızı düzenler. Karmaşık kağıt fişlerin ve hesap tablolarının yerini temiz, sezgisel bir dijital arayüz alır.",
+                featuresTitle: "Güçlü Özellikler",
+                featuresSubtitle: "Dükkanınızı verimli bir şekilde yönetmek için ihtiyacınız olan her şey.",
+                f1Title: "Tamir Takibi",
+                f1Desc: "Aktif onarımları izleyin, hazır olarak işaretleyin ve tamamlanan tüm işlerin tam geçmişini tutun.",
+                f2Title: "Stok Kontrolü",
+                f2Desc: "Gerçek zamanlı stok yönetimi. Parçalar, bir tamir biletine atandığında otomatik olarak düşülür.",
+                f3Title: "Yapay Zeka Asistanı",
+                f3Desc: "Dahili yapay zekaya geliriniz, stok seviyeleriniz veya iş trendleriniz hakkında sorular sorun.",
+                f4Title: "Finansal Analiz",
+                f4Desc: "Gelirinizi, maliyetlerinizi ve net kârınızı görselleştirin. Hasarlı ürün kayıplarını ve iadeleri takip edin.",
+                f5Title: "WhatsApp Bildirimleri",
+                f5Desc: "Tek tıkla müşterilere, son fiyatı içeren otomatik \"Cihaz Hazır\" mesajları gönderin.",
+                f6Title: "Excel İçe/Dışa Aktarma",
+                f6Desc: "Verilerinizi yedekleyin veya .xlsx dosyalarını kullanarak diğer sistemlerden geçiş yapın.",
+                fixTitle: "Neyi Çözer?",
+                fixSubtitle: "Yaygın tamir dükkanı sorunları, çözüldü.",
+                prob1: "Sorun: Kayıp Kağıt Fişler",
+                prob1Desc: "El yazısı fişler kaybolur veya okunmaz hale gelir, bu da müşteri anlaşmazlıklarına yol açar.",
+                sol1: "Çözüm: Dijital Veritabanı",
+                sol1Desc: "Her onarım dijital olarak kaydedilir, isim, cihaz veya telefon numarası ile anında aranabilir.",
+                prob2: "Sorun: Stok Belirsizliği",
+                prob2Desc: "Kutuyu fiziksel olarak kontrol edene kadar elinizde iPhone 11 ekranı olup olmadığını bilemezsiniz.",
+                sol2: "Çözüm: Otomatik Düşüm",
+                sol2Desc: "Parça ekledikçe stok sayıları otomatik güncellenir. Düşük stok uyarıları sizi hazırlıklı tutar.",
+                prob3: "Sorun: Bilinmeyen Kâr",
+                prob3Desc: "Geliri takip etmek kolaydır, ancak parça maliyeti, iadeler ve hasarlardan sonra gerçek kârı hesaplamak zordur.",
+                sol3: "Çözüm: Otomatik K/Z",
+                sol3Desc: "FixIt, gerçek Net Kârınızı göstermek için SMM, hasarlı kayıplar ve iadeleri hesaplar.",
+                footerTitle: "Dükkanınızı yükseltmeye hazır mısınız?",
+                footerDesc: "İşlerini düzenlemek için FixIt POS kullanan diğer profesyonellere katılın.",
+                footerBtn: "Hemen İndir"
+            },
+            ar: {
+                navDownload: "تحميل الآن",
+                heroBadge: "نسخة جديدة متوفرة",
+                heroTitle1: "أذكى طريقة لإدارة",
+                heroTitle2: "مركز الصيانة الخاص بك",
+                heroDesc: "تتبع الإصلاحات، إدارة المخزون، وتحليل الأرباح في تطبيق واحد قوي. صمم خصيصاً لفنيي الصيانة.",
+                mainDownload: "تحميل لنظام ويندوز",
+                learnMore: "المزيد",
+                aboutTitle: "ما هو FixIt POS؟",
+                aboutDesc: "FixIt POS هو تطبيق سطح مكتب حديث وخفيف مصمم خصيصاً لمراكز صيانة الإلكترونيات. سواء كنت تصلح الهواتف الذكية أو أجهزة الكمبيوتر المحمولة، يقوم FixIt بتبسيط سير عملك بالكامل من لحظة دخول العميل حتى الدفع. يستبدل التذاكر الورقية الفوضوية والجداول المعقدة بواجهة رقمية نظيفة وبديهية.",
+                featuresTitle: "ميزات قوية",
+                featuresSubtitle: "كل ما تحتاجه لإدارة متجرك بكفاءة.",
+                f1Title: "تتبع الإصلاحات",
+                f1Desc: "تتبع الإصلاحات النشطة، وضع علامة جاهز، واحتفظ بسجل كامل لجميع الأعمال المنجزة.",
+                f2Title: "مراقبة المخزون",
+                f2Desc: "إدارة المخزون في الوقت الحقيقي. يتم خصم القطع تلقائياً عند استخدامها في تذكرة الإصلاح.",
+                f3Title: "مساعد الذكاء الاصطناعي",
+                f3Desc: "اسأل الذكاء الاصطناعي المدمج عن إيراداتك أو مستويات المخزون أو اتجاهات العمل فوراً.",
+                f4Title: "التحليلات المالية",
+                f4Desc: "تخيل إيراداتك وتكاليفك وصافي الربح. تتبع خسائر البضائع التالفة والمرتجعات.",
+                f5Title: "تنبيهات واتساب",
+                f5Desc: "أرسل رسائل \"الجهاز جاهز\" تلقائية للعملاء بنقرة واحدة، بما في ذلك السعر النهائي.",
+                f6Title: "إدارة إكسل",
+                f6Desc: "قم بعمل نسخة احتياطية لبياناتك أو الانتقال من أنظمة أخرى بسهولة باستخدام ملفات .xlsx.",
+                fixTitle: "ماذا يحل؟",
+                fixSubtitle: "مشاكل مراكز الصيانة الشائعة، محلولة.",
+                prob1: "المشكلة: ضياع التذاكر الورقية",
+                prob1Desc: "الإيصالات المكتوبة بخط اليد تضيع أو تتلاشى، مما يسبب نزاعات وارتباك مع العملاء.",
+                sol1: "الحل: قاعدة بيانات رقمية",
+                sol1Desc: "يتم تسجيل كل إصلاح رقمياً، ويمكن البحث عنه بالاسم أو الجهاز أو رقم الهاتف فوراً.",
+                prob2: "المشكلة: تخمين المخزون",
+                prob2Desc: "عدم معرفة ما إذا كان لديك شاشة iPhone 11 في المخزون حتى تتحقق فعلياً من الصندوق.",
+                sol2: "الحل: الخصم التلقائي",
+                sol2Desc: "تتحدث أعداد المخزون تلقائياً عند إضافة قطع للإصلاح. تنبيهات انخفاض المخزون تبقيك مستعداً.",
+                prob3: "المشكلة: أرباح مجهولة",
+                prob3Desc: "من السهل تتبع الإيرادات، ولكن حساب الربح الحقيقي بعد تكلفة القطع والمرتجعات والتلفيات أمر صعب.",
+                sol3: "الحل: حساب الأرباح والخسائر",
+                sol3Desc: "يقوم FixIt بحساب تكلفة البضاعة وخسائر التلف والمرتجعات لإظهار صافي الربح الفعلي.",
+                footerTitle: "جاهز لترقية متجرك؟",
+                footerDesc: "انضم إلى المحترفين الآخرين الذين يستخدمون FixIt POS لتنظيم أعمال الصيانة الخاصة بهم.",
+                footerBtn: "تحميل الآن"
+            }
+        };
+
+        function setLanguage(lang) {
+            const elements = document.querySelectorAll('[data-key]');
+            const body = document.body;
+            const currentLangLabel = document.getElementById('current-lang');
+
+            // Set Direction
+            if (lang === 'ar') {
+                body.setAttribute('dir', 'rtl');
+            } else {
+                body.setAttribute('dir', 'ltr');
+            }
+
+            // Update Label
+            if (lang === 'en') currentLangLabel.textContent = "English";
+            if (lang === 'tr') currentLangLabel.textContent = "Türkçe";
+            if (lang === 'ar') currentLangLabel.textContent = "العربية";
+
+            // Update Text
+            elements.forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        function downloadApp() {
+            // Mock download behavior
+            alert("Thank you for downloading FixIt POS! \n(This is a demo site, so no actual file is downloaded.)");
+        }
+    </script>
+</body>
+</html>
