@@ -57,6 +57,13 @@
         .feature-card:hover {
             transform: translateY(-5px);
         }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
 <body class="text-slate-800 bg-white dark:bg-slate-950 dark:text-slate-200 transition-colors duration-300" dir="ltr">
@@ -331,6 +338,71 @@
         </div>
     </section>
 
+    <!-- Reviews -->
+    <section id="reviews" class="py-24 bg-slate-50 dark:bg-slate-900 overflow-hidden transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900 dark:text-white" data-key="reviewsTitle">What Our Users Say</h2>
+            </div>
+            
+            <div class="flex gap-6 overflow-x-auto pb-8 snap-x no-scrollbar">
+                <div class="min-w-[300px] md:min-w-[400px] snap-center bg-white dark:bg-slate-850 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i data-lucide="star" class="fill-current w-4 h-4"></i>
+                        <i data-lucide="star" class="fill-current w-4 h-4"></i>
+                        <i data-lucide="star" class="fill-current w-4 h-4"></i>
+                        <i data-lucide="star" class="fill-current w-4 h-4"></i>
+                        <i data-lucide="star" class="fill-current w-4 h-4"></i>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 italic mb-6" data-key="review1Text">"Very satisfied with the result! FixIt POS transformed how we track our repairs."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/50 rounded-full flex items-center justify-center text-blue-600 font-bold">د</div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white" data-key="review1Name">دلة العرب</h4>
+                            <p class="text-xs text-slate-500" data-key="review1Role">Repair Shop Owner</p>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="min-w-[300px] md:min-w-[400px] snap-center bg-white dark:bg-slate-850 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i><i data-lucide="star" class="fill-current w-4 h-4"></i>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 italic mb-6" data-key="review2Text">"The automated WhatsApp messages saved us hours of phone calls every week."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center text-slate-600 font-bold">JS</div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white">John Smith</h4>
+                            <p class="text-xs text-slate-500">Tech Solutions Inc.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="py-20 bg-white dark:bg-slate-950 border-t border-slate-100 dark:border-slate-900 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-12" data-key="partnersTitle">Our Core Team</h2>
+            <div class="flex flex-wrap justify-center gap-12">
+                <div class="flex flex-col items-center">
+                    <div class="w-20 h-20 bg-blue-600/10 rounded-2xl flex items-center justify-center mb-4 text-blue-600">
+                        <i data-lucide="code-2" class="w-10 h-10"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-900 dark:text-white">Zakarya</h3>
+                    <p class="text-slate-500 text-sm" data-key="roleDev">Lead Developer</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-20 h-20 bg-purple-600/10 rounded-2xl flex items-center justify-center mb-4 text-purple-600">
+                        <i data-lucide="palette" class="w-10 h-10"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-900 dark:text-white">Abbas</h3>
+                    <p class="text-slate-500 text-sm" data-key="roleDesign">UI/UX Designer</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer / Download -->
     <section id="download" class="py-20 bg-slate-900 dark:bg-black text-white text-center transition-colors duration-300">
         <div class="max-w-3xl mx-auto px-4">
@@ -463,7 +535,15 @@
                 sol3Desc: "FixIt calculates your COGS, damaged losses, and returns to show your actual Net Profit.",
                 footerTitle: "Ready to upgrade your shop?",
                 footerDesc: "Join other professionals using FixIt POS to streamline their repair business.",
-                footerBtn: "Download Now"
+                footerBtn: "Download Now",
+                reviewsTitle: "What Our Users Say",
+                review1Name: "Dalla Al-Arab",
+                review1Text: "Very satisfied with the result! FixIt POS transformed how we track our repairs.",
+                review1Role: "Business Owner",
+                review2Text: "The automated WhatsApp messages saved us hours of phone calls every week.",
+                partnersTitle: "Our Core Team",
+                roleDev: "Lead Developer",
+                roleDesign: "UI/UX Designer"
             },
             tr: {
                 navDownload: "İndir",
@@ -508,7 +588,15 @@
                 sol3Desc: "FixIt, gerçek Net Kârınızı göstermek için SMM, hasarlı kayıplar ve iadeleri hesaplar.",
                 footerTitle: "Dükkanınızı yükseltmeye hazır mısınız?",
                 footerDesc: "İşlerini düzenlemek için FixIt POS kullanan diğer profesyonellere katılın.",
-                footerBtn: "Hemen İndir"
+                footerBtn: "Hemen İndir",
+                reviewsTitle: "Kullanıcılarımız Ne Diyor?",
+                review1Name: "Dalla Al-Arab",
+                review1Text: "Sonuçtan çok memnun kaldım! FixIt POS, onarımlarımızı takip etme şeklimizi değiştirdi.",
+                review1Role: "İşletme Sahibi",
+                review2Text: "Otomatik WhatsApp mesajları bizi her hafta saatlerce süren telefon görüşmelerinden kurtardı.",
+                partnersTitle: "Çekirdek Ekibimiz",
+                roleDev: "Baş Geliştirici",
+                roleDesign: "UI/UX Tasarımcı"
             },
             ar: {
                 navDownload: "تحميل الآن",
@@ -553,7 +641,15 @@
                 sol3Desc: "يقوم FixIt بحساب تكلفة البضاعة وخسائر التلف والمرتجعات لإظهار صافي الربح الفعلي.",
                 footerTitle: "جاهز لترقية متجرك؟",
                 footerDesc: "انضم إلى المحترفين الآخرين الذين يستخدمون FixIt POS لتنظيم أعمال الصيانة الخاصة بهم.",
-                footerBtn: "تحميل الآن"
+                footerBtn: "تحميل الآن",
+                reviewsTitle: "ماذا يقول مستخدمونا",
+                review1Name: "دلة العرب",
+                review1Text: "راضٍ جداً عن النتيجة! لقد غير FixIt POS طريقة تتبعنا للإصلاحات تماماً.",
+                review1Role: "صاحب عمل",
+                review2Text: "رسائل الواتساب التلقائية وفرت علينا ساعات من المكالمات الهاتفية كل أسبوع.",
+                partnersTitle: "فريقنا الأساسي",
+                roleDev: "مطور برمجيات",
+                roleDesign: "مصمم واجهات"
             }
         };
 
